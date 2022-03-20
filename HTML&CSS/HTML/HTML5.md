@@ -200,7 +200,27 @@ HTML5 定义的 WebSocket 协议，能更好的节省服务器资源和带宽，
 
 
 
-好文[跳转](https://blog.csdn.net/weixin_45709829/article/details/115433620?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164086917216780271979046%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164086917216780271979046&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-115433620.pc_search_em_sort&utm_term=html5%E6%96%B0%E7%89%B9%E6%80%A7&spm=1018.2226.3001.4187)
+参考文章[跳转](https://blog.csdn.net/weixin_45709829/article/details/115433620?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164086917216780271979046%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164086917216780271979046&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-115433620.pc_search_em_sort&utm_term=html5%E6%96%B0%E7%89%B9%E6%80%A7&spm=1018.2226.3001.4187)
+
+
+
+
+
+#### 什么是WS/WSS？
+
+##### 概念
+
+WS是HTML5一种新的协议，它实现了浏览器与服务器全双工（full-duplex）通信，能更好地节省服务器资源和带宽并达到实时通讯。WS建立在TCP之上，同HTTP一样通过TCP来传输数据，但是它和HTTP最大不同是：
+
+WS是一种双向通信协议，在建立连接后，WS服务器和Browser/Client Agent都能主动地向对方发送或接收数据，就像Socket一样；WS需要类似TCP的客户端和服务器端通过握手连接，连接成功后才能相互通信。
+
+WSS是WS的加密版本。
+
+##### 为何使用WS/WSS？
+
+很多应用要求服务端有能力进行实时推送（例如直播间聊天室），以往很多网站为了实现推送技术，所用的技术都是轮询。轮询是在特定的时间间隔（如每1秒），由浏览器对服务器发出HTTP请求，然后由服务器返回最新的数据给客户端的浏览器。这种传统的模式带来很明显的缺点，即浏览器需要不断地向服务器发出请求，然而HTTP请求可能包含较长的头部，其中真正有效的数据可能只是很小的一部分，显然这样会浪费很多的带宽资源。
+
+在这种情况下，HTML5定义了WS协议，能更好地节省服务器资源和带宽，并且能够更实时地进行通讯。WS实现了浏览器与服务器全双工通信，允许服务器主动发送信息给客户端。
 
 
 

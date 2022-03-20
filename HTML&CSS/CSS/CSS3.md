@@ -6,7 +6,7 @@
 
 ::before和 ::after
 
-都需要配合 content:'内容或不填' 属性来使用
+都需要配合 content:'内容或不填' 和display或position属性来使用
 
 ::first-line
 

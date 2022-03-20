@@ -60,7 +60,7 @@ src 和 href 都是**用来引用外部的资源**
 
 三者加载区别对比：
 
-![script属性对比图](F:\进阶知识累计\HTML&CSS\HTML\img\script属性对比图.png)
+![script属性对比图](./img/script属性对比图.png)
 
 其中蓝色代表 js 脚本网络加载时间，红色代表 js 脚本执行时间，绿色代表 html 解析。
 
