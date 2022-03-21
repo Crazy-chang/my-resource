@@ -3,7 +3,7 @@ Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。“store�
 1. Vuex 的状态存储是响应式的。当 Vue 组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。
 2. 你不能直接改变 store 中的状态。改变 store 中的状态的唯一途径就是显式地**提交 (commit) mutation**。这样使得我们可以方便地跟踪每一个状态的变化。
 
-![vuex](F:\面试题及相关\vuex.png)
+![vuex](./img/vuex.png)
 
 **主要核心模块：**
 
