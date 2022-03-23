@@ -567,7 +567,7 @@ vue-router 路由模式有几种？
 
 
 
-#### vue的双向绑定
+#### 28、vue的双向绑定
 
 https://blog.csdn.net/weixin_52092151/article/details/119810514
 
