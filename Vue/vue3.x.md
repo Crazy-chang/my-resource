@@ -1,16 +1,54 @@
 # my-resource
 
+vue3是通过使用引入的方式
+
+vue3做了向下兼容，也可以使用vue2的写法
+
 ### 生命周期的变化
 
-### 响应式原理的改变，
+vue2						vue3
 
-Vue3.x 使用 Proxy 取代 Vue2.x 版本的 Object.defineProperty。vue3的Proxy 可以直接监听对象和数组的变化。
+beforeCreate	—>	setup
 
-### 组件选项声明方式，
+create		—>	setup
 
-Vue3.x 使用 Composition API setup 是 Vue3.x 新增的一个选项， 他是组件内使用 Composition API 的入口。在`vue2.0`里我们都把`.vue`文件里的`js`部分叫做`Options API`， 而在3.0里变为`Composition API`。
+beforeMount	—>	onBeforeMount
 
-### template模板语法变化；
+mounted		—>	onMounted 
+
+beforeUpdate	—>	onBeforeUpdate	
+
+updated 	—>	onUpdated
+
+beforeDestroy 	—>	onBeforeUnmount
+
+destroyed 	—>	onUnmounted
+
+errorCaptured 	—>	onErrorCaptured
+
+**执行先后循序：**
+
+setup > beforeCreate > data > created > onBeforeMount > beforeMount > onMounted > mounted
+
+**setup()**
+
+setup是在props解析之后，beforeCreate执行之前执行的。
+
+setup的第一个参数是组件的 **props**。第二个参数是一个 **Setup 上下文** 对象
+
+
+
+### 响应式原理的改变
+
+Vue3 使用 Proxy 取代 Vue2的 Object.defineProperty
+
+vue3的Proxy 可以直接监听对象和数组的变化，而vue2的defineProperty只能监听对象的变化
+
+### 组件选项声明方式
+
+Vue3 使用 Composition API setup 是 Vue3 新增的一个选项， 他是组件内使用 Composition API 的入口。在vue2里我们都把`.vue`文件里的`js`部分叫做`Options API`， 而在vue3里变为`Composition API`
+
+### template模板语法变化
 
 template不用根标签
 
@@ -27,9 +65,9 @@ template不用根标签
 
 通过这个‘根节点’，来递归遍历整个vue‘树’下的所有节点，并处理为vdom，最后再渲染成真正的HTML，插入在正确的位置
 
-### slot 具名插槽语法；
+### slot 具名插槽语法
 
-### 自定义指令；
+### 自定义指令
 
 v-model 的升级
 
@@ -49,13 +87,7 @@ main.js，新增createApp方法
 
 
 
-
-
-### vue2 和 vue3的区别是什么？
-
-
-
-### Vue3为什么用 Proxy 替代 vue2的defineProperty？
+### Vue3为什么用 Proxy 替代 vue2的defineProperty
 
 vue2里用的事defineProperty来做响应式，这个api需要单独对每个课迭代的key值进行监测。
 
@@ -100,8 +132,9 @@ proxy 深度监听怎么提高性能?
 
 
 
-### Vue3所采用的 Composition Api 与 Vue 2.x使用的Options Api 有什么区别？
+### vue3的Composition与vue2的Options Api区别
 
 最大的区别就是功能聚合度更高，同一个功能的代码可以放在同一个hooks里，方便维护和开发
 
 Options 总是划船找代码
+
