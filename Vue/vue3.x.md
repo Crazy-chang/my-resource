@@ -34,7 +34,7 @@ setup > beforeCreate > data > created > onBeforeMount > beforeMount > onMounted 
 
 setup是在props解析之后，beforeCreate执行之前执行的。
 
-setup的第一个参数是组件的 **props**。第二个参数是一个 **Setup 上下文** 对象
+setup接收两个参数，第一个参数是组件的 **props**。第二个参数是一个 **Setup 上下文** 对象
 
 
 
