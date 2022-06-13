@@ -170,7 +170,7 @@ HTML5 定义的 WebSocket 协议，能更好的节省服务器资源和带宽，
 
 
 
-### Canvas 与 SVG 的比较：
+#### Canvas 与 SVG 的比较：
 
 （1）Canvas：
 
@@ -198,11 +198,7 @@ HTML5 定义的 WebSocket 协议，能更好的节省服务器资源和带宽，
 
 
 
-
-
 参考文章[跳转](https://blog.csdn.net/weixin_45709829/article/details/115433620?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164086917216780271979046%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164086917216780271979046&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-2-115433620.pc_search_em_sort&utm_term=html5%E6%96%B0%E7%89%B9%E6%80%A7&spm=1018.2226.3001.4187)
-
-
 
 
 

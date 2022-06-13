@@ -32,7 +32,7 @@ vw：视图窗口宽度，1vw = 1%
 
 
 
-### 3、哪些 css 属性可以继承？
+### 3、css 属性之继承
 
 **可继承：** 
 
@@ -143,7 +143,7 @@ CSS中的@support主要是用于检测浏览器是否支持CSS的某个属性，
 
 
 
-### 7、什么是BFC 
+### 7、BFC 
 
 BFC(Block formatting context)直译为"块级格式化上下文"，是 Web 页面的可视化 CSS 渲染中的一部分，是布局过程中生成块级盒子的区域，也是浮动元素和其他元素的交互限定区域。
 
@@ -349,7 +349,11 @@ flex 布局是 CSS3 新增的一种布局方式，可以通过将一个元素的
 
 ### 对 requestAnimationframe 的理解
 
+https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestAnimationFrame
+
 实现动画效果的方法比较多，Javascript 中可以通过定时器 setTimeout 来实现，CSS3 中可以使用 transition 和 animation 来实现，HTML5 中的 canvas 也可以实现。除此之外，HTML5 提供一个专门用于请求动画的 API，那就是 requestAnimationFrame，顾名思义就是**请求动画帧**。
+
+使用requestAnimationFrame代替setTimeout，减少了重排的次数，极大提高了性能
 
 MDN 对该方法的描述：
 
@@ -376,7 +380,23 @@ MDN 对该方法的描述：
 
 ### 样式穿透
 
-/deep/
+```
+1、
+外层容器 >>> 组件 { 
+
+}
+
+2、
+外层容器 /deep/ 组件 {
+
+}
+
+3、
+外层容器 ::v-deep 组件 {
+
+}
+
+```
 
 
 
@@ -390,24 +410,68 @@ MDN 对该方法的描述：
 
 
 
+### position属性
 
-
-CSS hack
-
-CSS实现自适应正方形、等宽高比矩形
-
-实现三列布局的方式
-
-CSS 动画有哪些？
-
-用css2和css3分别写一下垂直居中和水平居中
-
-visibility 、 display 、opacity的区别
-
-opacity 可以有过渡效果嘛？
-
-说一下你知道的position属性，都有啥特点？
+| static   | 静态定位 | 默认值。没有定位，元素出现在正常的文档流中                   |
+| -------- | -------- | ------------------------------------------------------------ |
+| relative | 相对定位 | 生成相对定位的元素，相对于其正常位置进行定位。与 static 相似，元素原本的位置会被保留，区别是从文档的正常显示顺序里脱离出来 |
+| absolute | 绝对定位 | 生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。常用于结合 relative 来使用 |
+| fixed    | 固定定位 | 生成固定定位的元素，脱离文档流，相对于浏览器窗口进行定位     |
+| sticky   | 粘性定位 | 该定位基于用户滚动的位置。它的行为就像 relative，而当页面滚动超出目标区域时，它的表现就像fixed，它会固定在目标位置。常用于吸顶 |
+| inherit  | 继承定位 | 规定应该从父元素继承 position 属性的值。                     |
 
 
 
-webpack HMR 原理
+### CSS hack
+
+什么是CSS hack？就是针对针对不同的浏览器或不同版本设置不同的CSS属性, 我们就称之为CSS Hack。其中以firefox，IE为主
+
+CSS hack的写法大致归纳为3种：条件hack、属性级hack、选择符级hack。
+
+
+
+### display 、visibility 、opacity
+
+**display ：**
+
+默认值为 `block` 或 `inline`，为none时是隐藏
+
+- **事件监听**：无法进行 DOM 事件监听，不能点击
+- **继承**：不可继承，由于元素从渲染树消失，造成子孙节点消失
+- **transition**：不支持 
+- **性能**：修改元素会造成文档回流，性能消耗较大
+
+
+
+**visibility ：**
+
+默认值为 `visible`可见；hidden为隐藏；inherit是从父元素继承 visibility 属性的值；collapse指当在表格元素中使用时，此值可删除一行或一列，但是它不会影响表格的布局。被行或列占据的空间会留给其他内容使用。如果此值被用在其他的元素上，会呈现为 "hidden"
+
+- **事件监听**：无法进行 DOM 事件监听，不能点击
+
+- **继承**：会被子元素继承，子元素可以通过设置 visibility: visible; 来取消隐藏
+- **transition**：支持 ，visibility 会立即显示，隐藏时会延时
+- **性能**：修改元素只会造成本元素的重绘，性能消耗较少
+
+
+
+**opacity：**
+
+透明度属性，值是 0~1 ，0 的透明度为 100%，文档流还存在只是看不见
+
+- **事件监听**：可以进行 DOM 事件监听，可以点击
+
+- **继承**：会被子元素继承，且子元素并不能通过 opacity: 1 来取消隐藏；
+- **transition**：支持
+- **性能**：提升为合成层，是重建图层，不和动画属性一起则不会产生repaint（不脱离文档流，不会触发重绘），性能消耗较少
+
+
+
+
+
+自适应正方形、等宽高比矩形
+
+三列布局
+
+
+
