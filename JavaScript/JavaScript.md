@@ -524,10 +524,61 @@ AST 全称为 Abstract Syntax Tree，译为抽象语法树。在 JavaScript 中�
 
 
 
-### promise、fetch、axios、async和ajax区别
+### 浅谈ajax、fetch和axios
+
+**ajax：**
+
+ajax是 Asynchronous JavaScript XML 的缩写，被译为异步 JavaScript 和 XML
+
+ajax是一个**概念模型**，只是为实现异步交互的手段，是一个囊括了众多现有技术的**集合**，并不具体代指某项技术。其中最重要的是 XMLHttpRequest（XHR）对象
+
+Ajax 最重要的特性就是可以**局部刷新页面**，而不需要重载（刷新）整个页面
+
+而jQuery的ajax，只是对ajax的封装，使用对象形式及回调处理。
+
+缺点：容易产生回调地狱（以下都可以解决）；XHR 结构不清晰
 
 
 
+**fetch：**
+
+fetch() 是一个全局方法，属于原生的 js 代码，脱离 XHR ，基于 Promise
+
+Fetch API提供了许多与 XMLHttpRequest 相同的功能，但被设计成**更具可扩展性和高效性**
+
+默认不带cookie，使用时需要设置
+
+fetch方法必须接受一个参数（资源的路径）
+
+fetch请求无论成功与否，它都返回一个 Promise 对象。fetch 不同于 xhr ，xhr 自带取消、错误等方法，所以服务器返回 4xx 或 5xx 时，是不会抛出错误的，需要手动处理，通过 response 中的 status 字段来判断。只有在网络错误的情况下，promise才会被reject
+
+缺点：
+
+浏览器支持性比较差
+
+fetch不支持jsonp
+
+fetch 自身没有提供 中止请求的方法。但是部分浏览器有实现AbortController，可以通过AbortController中止fetch请求
+
+参考：https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API
+
+
+
+**Axios：**
+
+一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中
+
+本质上也是对原生XHR的封装，只不过它是Promise的实现版本
+
+客户端 Axios 的主要特性有：
+
+- 从浏览器创建 XMLHttpRequest
+- 支持 Promise API
+- 拦截请求和响应
+- 转换请求和响应数据
+- 取消请求
+- 自动转换JSON数据
+- 客户端支持防御CSRF/XSRF
 
 
 

@@ -1,7 +1,5 @@
 ## ES6新特新总结
 
-参考文章：https://es6.ruanyifeng.com/#README
-
 ### 1、let，const 声明
 
 ​	**let：**块级作用域，声明变量后可立马赋值或使用时赋值；
@@ -63,6 +61,8 @@
 
 数组扩展运算符
 
+正则扩展
+
 #### 函数扩展
 
 **箭头函数**
@@ -110,13 +110,22 @@ if(obj?.arr?.value){}
 
 
 
-#### 正则扩展
-
 
 
 ### 4、Symbol
 
-代表创建后独一无二且不可变的数据类型，它主要是为了解决可能出现的全局变量冲突的问题
+`Symbol`，表示独一无二的值。代表创建后独一无二且不可变的数据类型，它主要是为了解决可能出现的全局变量冲突的问题
+
+```
+let s = Symbol('666');
+
+typeof s	// "symbol"
+
+// 只接收一个参数，参数的作用只是用来描述Symbol 实例，在控制台显示。
+s.toString()   // 'Symbol(666)'   
+```
+
+Symbol 函数前不能使用`new`命令，否则会报错。这是因为生成的 Symbol 是一个原始类型的值，不是对象。
 
 
 
@@ -177,17 +186,32 @@ map本质上就是键值对的集合，但是普通的Object中的键值对中�
 
 ### 7、Proxy
 
-- 定义：修改某些操作的默认行为
-- 声明：`const proxy = new Proxy(target, handler)`
-- 入参
-  - **target**：拦截的目标对象
-  - **handler**：定制拦截行为
+Proxy（代理） 用于修改某些操作的默认行为。外界对该对象的访问，都必须先通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。
 
-- 
+简单来说`Proxy` 是对对象的包装，将代理上的操作转发到对象，并可以选择捕获其中的一些操作
 
-代理；在vue3中解决了vue2只能响应式对象不能处理数组问题；
+```
+// Proxy 对象的所有用法，都是以下这种形式
+// 接收两个参数：target：要拦截的目标对象；handler：定制拦截行为
+
+const proxy = new Proxy(target, handler)
+
+var handler = {
+	 get: function(target, propKey) {
+        return 666;
+     }
+}
+```
+
+在vue3中解决了vue2只能响应式对象不能处理数组问题
+
+
 
 ### 8、Reflect
+
+Reflect（反射）对象与`Proxy`对象一样，也是 ES6 为了操作对象而提供的新 API
+
+
 
 ### 9、Promise 
 
@@ -256,6 +280,16 @@ then接收的参数是函数，当传的不是函数，会发生透传，会把�
 
 
 ### 10、Iterator
+
+JavaScript 原有的表示“集合”的数据结构，主要是数组（`Array`）和对象（`Object`），ES6 又添加了`Map`和`Set`。这样就有了四种数据集合，用户还可以组合使用它们，定义自己的数据结构，比如数组的成员是`Map`，`Map`的成员是对象。这样就需要一种统一的接口机制，来处理所有不同的数据结构。
+
+遍历器（Iterator）就是这样一种机制。它是一种接口，为各种不同的数据结构提供统一的访问机制。任何数据结构只要部署 Iterator 接口，就可以完成遍历操作（即依次处理该数据结构的所有成员）。
+
+Iterator 的作用有三个：一是为各种数据结构，提供一个统一的、简便的访问接口；二是使得数据结构的成员能够按某种次序排列；三是 ES6 创造了一种新的遍历命令`for...of`循环，Iterator 接口主要供`for...of`消费
+
+
+
+
 
 ### 11、Generator
 
@@ -341,7 +375,7 @@ g.next()  // {value:undefide,done:true}
 
 ### 12、async 
 
-就是 Generator 函数的语法糖。
+async await是generator的语法糖。也就是说本质上没有区别，只不过async是通过封装generator生成器，来修饰promise的异步请求通过yield关键字和next方法得到了近乎于同步执行的异步编程方式
 
 async函数是对 Generator 函数的改进，体现在以下4点
 
@@ -376,7 +410,7 @@ async函数是对 Generator 函数的改进，体现在以下4点
 
 extend 暴露出模块内部功能； import 导入模块内部功能 
 
-#### ES6的Module和CommonJS模块的区别：
+**Module和CommonJS的区别：**
 
 - CommonJS是对模块的浅拷⻉，ES6 Module是对模块的引⽤，即ES6 Module只存只读，不能改变其值，也就是指针指向不能变，类似const；
 - import的接⼝是read-only（只读状态），不能修改其变量值。 即不能修改其变量的指针指向，但可以改变变量内部指针指向，可以对commonJS对重新赋值（改变指针指向），但是对ES6 Module赋值会编译报错。
@@ -387,3 +421,6 @@ ES6的Module和CommonJS模块的共同点：
 
 
 
+
+
+参考：https://es6.ruanyifeng.com/#README
