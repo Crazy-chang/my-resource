@@ -453,6 +453,75 @@ useEffect(() => {
 
 
 
-### 状态管理
+### Hook
 
-redux，mobx
+https://zh-hans.reactjs.org/docs/hooks-intro.html
+
+Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。
+
+什么是 Hook
+Hook 是一些可函以让你在数组件里“钩入” React state 及生命周期等特性的函数。Hook 不能在 class 组件中使用 —— 这使得你不使用 class 也能使用 React。
+
+react常见的hook有：useState，useEffect
+
+Hook 使用规则
+
+1、只能在函数最外层调用 Hook。不要在循环、条件判断或者子函数中调用。
+2、只能在 React 的函数组件和自定义的 Hook 中调用 Hook。不要在其他 JavaScript 函数中调用。
+
+自定义 Hook
+有时候我们会想要在组件之间重用一些状态逻辑。目前为止，有两种主流方案来解决这个问题：高阶组件和 render props。自定义 Hook 可以让你在不增加组件的情况下达到同样的目的。
+
+Hook 是一种复用状态逻辑的方式，它不复用 state 本身。Hook 的每次调用都有一个完全独立的 state ，所以可以在单个组件中多次调用同一个自定义 Hook。
+
+
+
+### redux
+
+https://www.redux.org.cn/
+
+https://blog.csdn.net/weixin_57218747/article/details/118070930
+
+应用的整体全局状态以对象树的方式存放于单个 store。
+唯一改变状态树（state tree）的方法是创建 action，一个描述发生了什么的对象（而不是直接改变 state），并将其 dispatch 给 store。 要指定状态树如何响应 action 来进行更新，
+你可以编写纯 reducer 函数，这些函数根据旧 state 和 action 来计算新 state。
+
+它的 API 有 subscribe, dispatch, getState 
+
+Redux state 应该只包含普通的 JS 对象、数组和原语。
+根状态值通常是一个对象。 重要的是，不应该改变 state 对象，而是在 state 发生变化时返回一个新对象。
+
+可以在 reducer 中使用任何条件逻辑。这个例子中使用了 switch 语句，但这不是必需的。
+
+```
+import { createStore } from 'redux';
+// 初始化一个默认对象
+const initState = {
+  value: 0 
+}
+function counterReducer(state = initState, action) {
+  switch (action.type) {
+    case 'counter/incremented':
+      return { value: state.value + 1 };
+    case 'counter/decremented':
+      return { value: state.value - 1 };
+    default:
+      return state;
+  }
+}
+
+let stores = createStore(counterReducer);
+
+// subscribe可以理解为订阅事件,监听state的改变
+// 可以使用 subscribe() 来更新 UI 以响应 state 的更改。通常你会使用视图绑定库（如 React Redux）而不是直接使用 subscribe()
+stores.subscribe(() => console.log(stores.getState()));
+
+// 改变内部状态的唯一方法是 dispatch 一个 action。这些 action 可以被序列化、记录或存储，然后再重放
+stores.dispatch({ type: 'counter/incremented' });  // value: 1
+stores.dispatch({ type: 'counter/decremented' });  // value: 0
+```
+
+
+
+
+mobx
